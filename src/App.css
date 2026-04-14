@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* PRINCIPALES */
+  --color-primary: #702ae1;
+  --color-secondary: #702ae1;
+  --color-accent: #b80438;
+
+  /* FONDO */
+  --color-background: #f5f7f9;
+  --color-surface: #ffffff;
+
+  /* TEXTO */
+  --color-text: #2c2f31;
+  --color-text-secondary: #595c5e;
+  --color-text-muted: #6b7280;
+
+  /* ESTADOS */
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-error: #dc2626;
+
+  /* BORDES */
+  --color-border: #e5e7eb;
+
+  /* BOTÓN PRIMARY */
+  --color-btn-primary: var(--color-primary);
+  --color-btn-primary-hover: #1d4ed8;
+  --color-btn-primary-text: #ffffff;
+
+  /* BOTÓN SECONDARY */
+  --color-btn-secondary: #eef2ff;
+  --color-btn-secondary-hover: #e0e7ff;
+  --color-btn-secondary-text: var(--color-primary);
+
+  /* BOTÓN OUTLINE */
+  --color-btn-outline-border: var(--color-border);
+  --color-btn-outline-hover: #f9fafb;
+
+  /* ============================== */
+  /* FONTS */
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
+  /* ============================== */
+}
