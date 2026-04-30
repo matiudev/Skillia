@@ -2,25 +2,17 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { CeroItems } from "../../../components/CeroItems";
 import { BookMarkedIcon, Clock } from "lucide-react";
-import { useCourseStore } from "../../../store/useCourseStore";
+import { useCourseStore } from "../../course/store/useCourseStore";
 import { SkeletonCard } from "../../../components/SkeletonCard";
+import { useCourses } from "../../course/hooks/useCourses";
 
 function FeaturedCourses() {
-  const courses = useCourseStore((state) => state.courses);
-  const fetchCourses = useCourseStore((state) => state.fetchCourses);
-  const loading = useCourseStore((state) => state.loading);
-
+  const { courses, loading } = useCourses();
   const [randomCourses, setRandomCourses] = useState([]);
 
   useEffect(() => {
-    if (courses.length === 0) {
-      fetchCourses();
-    }
-  }, [courses, fetchCourses]);
-
-  useEffect(() => {
     if (courses.length > 0) {
-      const random = [...courses].sort(() => 0.5 - Math.random()).slice(0, 3);
+      const random = [...courses].sort(() => Math.random() - 0.5).slice(0, 3);
       setRandomCourses(random);
     }
   }, [courses]);
@@ -73,7 +65,10 @@ function FeaturedCourses() {
                   {course.description}
                 </p>
                 <div className="mt-auto w-full text-center bg-gray-100 rounded-2xl my-5 text-primary font-bold py-4 hover:bg-gray-200 hover:cursor-pointer">
-                  <NavLink to={`/courseDetail/${course.id}`} className="text-center">
+                  <NavLink
+                    to={`/courseDetail/${course.id}`}
+                    className="text-center"
+                  >
                     Ver Curso
                   </NavLink>
                 </div>

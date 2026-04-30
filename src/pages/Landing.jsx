@@ -1,10 +1,10 @@
 import { CircleStar, Clock, Infinity } from "lucide-react";
-import HeaderLanding from "./components/HeaderLanding";
+import HeaderLanding from "../feature/landing/components/HeaderLanding";
 import { NavLink } from "react-router-dom";
-import HowItWorks from "./components/HowItWorks";
-import FeaturedCourses from "./components/FeaturedCourses";
-import StudentComments from "./components/StudentComments";
-import Footer from "../../components/Footer";
+import HowItWorks from "../feature/landing/components/HowItWorks";
+import FeaturedCourses from "../feature/landing/components/FeaturedCourses";
+import StudentComments from "../feature/landing/components/StudentComments";
+import Footer from "../components/Footer";
 
 const INFO = [
   {
@@ -32,8 +32,8 @@ const INFO = [
 
 function Landing() {
   return (
-    <div>
-   <div className="bg-[#f0f3f8] px-10 md:px-36 pt-6 pb-30 font-headline">
+    <>
+      <div className="bg-[#f0f3f8] px-10 md:px-36 pt-6 pb-30 font-headline">
         <div className="h-dvh">
           <HeaderLanding />
           <div className="grid grid-cols-2 justify-between gap-10 mt-20">
@@ -102,7 +102,7 @@ function Landing() {
         </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import HeaderLanding from "../landing/components/HeaderLanding";
-import Footer from "../../components/Footer";
+import HeaderLanding from "../feature/landing/components/HeaderLanding";
+import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
-import { getCourseById } from "../../services/courseService";
-import { SkeletonCard } from "../../components/SkeletonCard";
+import { getCourseById } from "../feature/course/services/courseService";
+import { SkeletonCard } from "../components/SkeletonCard";
 import {
   Clock,
   Infinity,

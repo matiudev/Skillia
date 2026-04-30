@@ -1,24 +1,15 @@
 import React, { useEffect } from "react";
-import HeaderLanding from "../landing/components/HeaderLanding";
-import { useCourseStore } from "../../store/useCourseStore";
-import { SkeletonCard } from "../../components/SkeletonCard";
-import { CeroItems } from "../../components/CeroItems";
+import HeaderLanding from "../feature/landing/components/HeaderLanding";
+import { useCourseStore } from "../feature/course/store/useCourseStore";
+import { SkeletonCard } from "../components/SkeletonCard";
+import { CeroItems } from "../components/CeroItems";
 import { BookMarkedIcon } from "lucide-react";
-import Footer from "../../components/Footer";
-import AllCourses from "./components/AllCourse";
+import Footer from "../components/Footer";
+import AllCourses from "../feature/course/components/AllCourse";
+import { useCourses } from "../feature/course/hooks/useCourses";
 
 function Courses() {
-  const courses = useCourseStore((state) => state.courses);
-  const fetchCourses = useCourseStore((state) => state.fetchCourses);
-  const loading = useCourseStore((state) => state.loading);
-
-  useEffect(() => {
-    if (courses.length === 0) {
-      console.log("fetch?");
-      
-      fetchCourses();
-    }
-  }, [courses, fetchCourses]);
+  const { courses, loading } = useCourses();
 
   return (
     <div>
