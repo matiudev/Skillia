@@ -60,8 +60,6 @@ export const useAuthStore = create((set) => ({
       return { success: false, error: error.message };
     }
 
-    console.log(data);
-
     set({
       user: data.user,
       fullName: data.user.user_metadata.fullName,

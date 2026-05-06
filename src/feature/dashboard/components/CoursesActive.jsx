@@ -15,23 +15,36 @@ function CoursesActive({ course, myProgress }) {
       }
     });
   });
-  
-  const percentage = Math.round((lessonsWithProgress.length / totalLessons) * 100);
+
+  const percentage = Math.round(
+    (lessonsWithProgress.length / totalLessons) * 100
+  );
 
   return (
-    <section className="bg-white rounded-2xl flex justify-between p-7 items-center">
-      <div className="flex gap-10">
-        <img src={course.image_url} alt="" className="h-48 w-80 rounded-xl" />
+    <section className="bg-white rounded-2xl p-5 md:p-7 flex flex-col sm:flex-row gap-5 sm:gap-6 items-start sm:items-center justify-between">
+      
+      {/* Imagen + Info */}
+      <div className="flex flex-col sm:flex-row gap-5 sm:gap-8 w-full sm:w-auto">
+        <img
+          src={course.image_url}
+          alt={course.title}
+          className="w-full sm:w-48 md:w-64 lg:w-80 h-44 sm:h-36 md:h-40 lg:h-48 rounded-xl object-cover shrink-0"
+        />
 
-        <div className="flex flex-col justify-center gap-3">
-          <p className="text-2xl font-semibold text-text">{course.title}</p>
-          <p className="text-lg font-semibold text-text">
-            Módulo: {lessonsWithProgress.at(-1)?.title}
+        <div className="flex flex-col justify-center gap-3 min-w-0">
+          <p className="text-lg md:text-xl lg:text-2xl font-semibold text-text truncate">
+            {course.title}
           </p>
 
+          {lessonsWithProgress.at(-1) && (
+            <p className="text-sm md:text-base font-semibold text-text-secondary truncate">
+              Última lección: {lessonsWithProgress.at(-1)?.title}
+            </p>
+          )}
+
           {/* Barra de progreso */}
-          <div className="w-64">
-            <div className="flex justify-between text-sm text-gray-500 mb-1">
+          <div className="w-full max-w-xs">
+            <div className="flex justify-between text-xs md:text-sm text-gray-500 mb-1">
               <span>Progreso</span>
               <span>{percentage}%</span>
             </div>
@@ -48,12 +61,17 @@ function CoursesActive({ course, myProgress }) {
         </div>
       </div>
 
-      <div>
-        <NavLink to={`/coursePlayer/${course.id}`} className="bg-primary w-full rounded-xl p-3 text-white font-semibold">
-          Continuar Aprendiendo →
+      {/* Botón */}
+      <div className="w-full sm:w-auto shrink-0">
+        <NavLink
+          to={`/coursePlayer/${course.id}`}
+          className="bg-primary block text-center sm:inline-block rounded-xl px-5 py-3 text-white font-semibold hover:bg-purple-900 transition-colors whitespace-nowrap"
+        >
+          Continuar →
         </NavLink>
       </div>
     </section>
   );
 }
+
 export default CoursesActive;

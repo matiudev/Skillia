@@ -34,7 +34,13 @@ function HeaderDashboard({ handleLogout }) {
             >
               Dashboard
             </NavLink>
-            <button onClick={handleLogout} className="flex gap-1 text-red-500 font-bold hover:cursor-pointer hover:text-red-700"><LogOut />Cerrar sesión</button>
+            <button
+              onClick={handleLogout}
+              className="flex gap-1 text-red-500 font-bold hover:cursor-pointer hover:text-red-700"
+            >
+              <LogOut />
+              Cerrar sesión
+            </button>
           </div>
         ) : (
           <div className="hidden md:flex gap-6 items-center">
@@ -90,6 +96,14 @@ function HeaderDashboard({ handleLogout }) {
             >
               Dashboard
             </NavLink>
+
+            <button
+              onClick={handleLogout}
+              className="flex gap-1 text-red-500 font-bold hover:cursor-pointer hover:text-red-700"
+            >
+              <LogOut />
+              Cerrar sesión
+            </button>
           </div>
         ) : (
           <div className="flex flex-col gap-4 px-4 pb-4 md:hidden">

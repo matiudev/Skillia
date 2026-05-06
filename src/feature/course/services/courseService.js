@@ -12,8 +12,6 @@ export const getCourses = async () => {
     return [];
   }
 
-  console.log(data);
-
   return data;
 };
 
@@ -36,7 +34,7 @@ export const getCourseById = async (id) => {
     `,
     )
     .eq("id", id)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error(error);
@@ -110,7 +108,7 @@ export const checkEnrollment = async (userId, courseId) => {
     .select("id")
     .eq("usuario_id", userId)
     .eq("course_id", courseId)
-    .single();
+    .maybeSingle();
 
   if (error) return false;
   return !!data;

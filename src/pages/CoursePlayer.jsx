@@ -41,8 +41,6 @@ function CoursePlayer() {
       );
       setCompletedIds(done);
 
-      console.log(courseData);
-
       // Lección activa: primera no completada, o la primera del curso
       const allLessons = courseData?.modules?.flatMap((m) => m.lessons) ?? [];
       const firstPending = allLessons.find((l) => !done.has(l.id));
