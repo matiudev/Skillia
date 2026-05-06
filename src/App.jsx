@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useAuthStore } from "./feature/auth/store/useAuthStore";
 import { supabase } from "./lib/supabase";
 import CoursePlayer from "./pages/CoursePlayer";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const getSession = useAuthStore((state) => state.getSession);
@@ -74,6 +75,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import HeaderLanding from "../feature/landing/components/HeaderLanding";
 import Footer from "../components/Footer";
-import { useParams } from "react-router-dom";
-import { getCourseById } from "../feature/course/services/courseService";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
+import {
+  checkEnrollment,
+  enrollCourse,
+  getCourseById,
+} from "../feature/course/services/courseService";
 import { SkeletonCard } from "../components/SkeletonCard";
 import {
   Clock,
@@ -13,19 +17,69 @@ import {
   User,
   Verified,
 } from "lucide-react";
+import { useAuthStore } from "../feature/auth/store/useAuthStore";
 
 function CourseDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [course, setCourse] = useState(null);
   const [openModule, setOpenModule] = useState(null);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const user = useAuthStore((state) => state.user);
+
+useEffect(() => {
+  const fetch = async () => {
+    const data = await getCourseById(id);
+
+    if (!data) {
+      navigate("/not-found");
+      return;
+    }
+
+    setCourse(data);
+  };
+  fetch();
+}, [id]);
 
   useEffect(() => {
-    const fetch = async () => {
-      const data = await getCourseById(id);
-      setCourse(data);
+    if (!user || !id) return;
+
+    const verify = async () => {
+      const enrolled = await checkEnrollment(user.id, id);
+      setIsEnrolled(enrolled);
     };
-    fetch();
-  }, [id]);
+    verify();
+  }, [user, id]);
+
+  const getButtonLabel = () => {
+    if (!user) return "Inscribirse Ahora";
+    if (isEnrolled) return "Continuar Curso";
+    return "Inscribirse Ahora";
+  };
+
+  const handleRollCourse = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
+    if (isEnrolled) {
+      navigate(`/coursePlayer/${id}`);
+      return;
+    }
+
+    setLoading(true);
+    const success = await enrollCourse(user.id, id);
+    setLoading(false);
+
+    if (success) {
+      navigate(`/coursePlayer/${id}`);
+    } else {
+      alert("Hubo un error al inscribirse. Intenta nuevamente.");
+    }
+  };
 
   return (
     <div>
@@ -154,8 +208,12 @@ function CourseDetail() {
                   </p>
                   <p>$0</p>
                 </div>
-                <button className="bg-primary px-5 w-full rounded-2xl py-3 text-white font-bold mt-5 hover:bg-purple-900 hover:cursor-pointer transition-colors">
-                  Inscribirse Ahora
+                <button
+                  onClick={handleRollCourse}
+                  disabled={loading}
+                  className="bg-primary px-5 w-full rounded-2xl py-3 text-white font-bold mt-5 hover:bg-purple-900 hover:cursor-pointer transition-colors disabled:opacity-60"
+                >
+                  {loading ? "Procesando..." : getButtonLabel()}
                 </button>
                 <p className="text-center mt-3 font-semibold text-text-secondary text-sm">
                   Garantía de Devolución de 30 días

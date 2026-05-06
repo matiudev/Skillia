@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuthStore } from "../../auth/store/useAuthStore";
+import { LogOut } from "lucide-react";
 
 const linkClass = ({ isActive }) =>
   isActive
     ? "text-secondary font-semibold font-headline border-b-2 border-secondary"
     : "text-text-muted font-semibold font-headline";
 
-function HeaderDashboard() {
+function HeaderDashboard({ handleLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const user = useAuthStore((state) => state.user);
 
@@ -33,6 +34,7 @@ function HeaderDashboard() {
             >
               Dashboard
             </NavLink>
+            <button onClick={handleLogout} className="flex gap-1 text-red-500 font-bold hover:cursor-pointer hover:text-red-700"><LogOut />Cerrar sesión</button>
           </div>
         ) : (
           <div className="hidden md:flex gap-6 items-center">

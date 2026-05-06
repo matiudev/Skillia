@@ -102,3 +102,28 @@ export const upsertProgress = async (userId, lessonId, completed = false) => {
 
   if (error) console.error(error);
 };
+
+
+export const checkEnrollment = async (userId, courseId) => {
+  const { data, error } = await supabase
+    .from("enrollments")
+    .select("id")
+    .eq("usuario_id", userId)
+    .eq("course_id", courseId)
+    .single();
+
+  if (error) return false;
+  return !!data;
+};
+
+export const enrollCourse = async (userId, courseId) => {
+  const { error } = await supabase
+    .from("enrollments")
+    .insert({ usuario_id: userId, course_id: courseId });
+
+  if (error) {
+    console.error(error);
+    return false;
+  }
+  return true;
+};

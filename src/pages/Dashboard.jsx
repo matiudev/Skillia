@@ -20,12 +20,12 @@ function Dashboard() {
   return (
     <>
       <section className="bg-[#f0f3f8] px-4 sm:px-8 md:px-20 lg:px-36 pb-20 pt-6 font-headline overflow-x-hidden">
-        <HeaderDashboard />
-        <section className="pt-10">
+        <HeaderDashboard handleLogout={handleLogout} />
+        <section className="pt-10 pb-10">
           <p className="text-primary font-bold">Panel de Control</p>
           <h4 className="text-text text-4xl font-bold">Hola, {full_name} ✨</h4>
           <p className="text-text-secondary">
-            Es un gran dia para aprender algo nuevo. Tienes 3 cursos en curso.
+            Es un gran dia para aprender algo nuevo.
           </p>
         </section>
         <section>
@@ -56,7 +56,6 @@ function Dashboard() {
             </div>
           )}
         </section>
-        <button onClick={handleLogout}>Cerrar sesión</button>
       </section>
       <Footer />
     </>
